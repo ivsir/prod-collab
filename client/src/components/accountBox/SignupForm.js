@@ -11,6 +11,7 @@ import { AccountContext } from "../../components/accountBox/AccountContext";
 import {
   BoldLink,
   BoxContainer,
+  LoginContainer,
   FormContainer,
   InputContainer,
   Input,
@@ -56,7 +57,7 @@ export function SignupForm() {
 
   return (
     <BoxContainer>
-      <FormContainer id="signup-container" onSubmit={handleFormSubmit}>
+      <LoginContainer id="signup-container" onSubmit={handleFormSubmit}>
         <InputContainer>
           <Input
             id="signup-input1"
@@ -98,7 +99,7 @@ export function SignupForm() {
             Sign In{" "}
           </BoldLink>
         </MutedLink>
-      </FormContainer>
+      </LoginContainer>
     </BoxContainer>
   );
 }

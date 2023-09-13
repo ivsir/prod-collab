@@ -1,6 +1,150 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
+import { createGlobalStyle } from "styled-components";
+import SatoshiVariable from "../style/fonts/Satoshi-Variable.woff2";
+import SatoshiVariableItalic from "../style/fonts/Satoshi-VariableItalic.woff2";
+import SatoshiLight from "../style/fonts/Satoshi-Light.woff2";
+import SatoshiBold from "../style/fonts/Satoshi-Bold.woff2";
+import SatoshiRegular from "../style/fonts/Satoshi-Regular.woff2";
+import Background from "../../assets/room.gif";
+
+export default createGlobalStyle`
+
+@font-face {
+  font-family: 'Satoshi-Variable';
+  src: url(${SatoshiVariable}) format('woff2'),
+       url('fonts/Satoshi-Variable.woff') format('woff'),
+       url('fonts/Satoshi-Variable.ttf') format('truetype');
+       font-weight: 300 900;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-VariableItalic';
+  src: url(${SatoshiVariableItalic}) format('woff2'),
+       url('fonts/Satoshi-VariableItalic.woff') format('woff'),
+       url('fonts/Satoshi-VariableItalic.ttf') format('truetype');
+       font-weight: 300 900;
+       font-display: swap;
+       font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-Light';
+  src: url(${SatoshiLight}) format('woff2'),
+       url('fonts/Satoshi-Light.woff') format('woff'),
+       url('fonts/Satoshi-Light.ttf') format('truetype');
+       font-weight: 300;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-LightItalic';
+  src: url('fonts/Satoshi-LightItalic.woff2') format('woff2'),
+       url('fonts/Satoshi-LightItalic.woff') format('woff'),
+       url('fonts/Satoshi-LightItalic.ttf') format('truetype');
+       font-weight: 300;
+       font-display: swap;
+       font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-Regular';
+  src: url(${SatoshiRegular}) format('woff2'),
+       url('fonts/Satoshi-Regular.woff') format('woff'),
+       url('fonts/Satoshi-Regular.ttf') format('truetype');
+       font-weight: 400;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-Italic';
+  src: url('fonts/Satoshi-Italic.woff2') format('woff2'),
+       url('fonts/Satoshi-Italic.woff') format('woff'),
+       url('fonts/Satoshi-Italic.ttf') format('truetype');
+       font-weight: 400;
+       font-display: swap;
+       font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-Medium';
+  src: url('fonts/Satoshi-Medium.woff2') format('woff2'),
+       url('fonts/Satoshi-Medium.woff') format('woff'),
+       url('fonts/Satoshi-Medium.ttf') format('truetype');
+       font-weight: 500;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-MediumItalic';
+  src: url('fonts/Satoshi-MediumItalic.woff2') format('woff2'),
+       url('fonts/Satoshi-MediumItalic.woff') format('woff'),
+       url('fonts/Satoshi-MediumItalic.ttf') format('truetype');
+       font-weight: 500;
+       font-display: swap;
+       font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-Bold';
+  src: url(${SatoshiBold}) format('woff2'),
+       url('fonts/Satoshi-Bold.woff') format('woff'),
+       url('fonts/Satoshi-Bold.ttf') format('truetype');
+       font-weight: 700;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-BoldItalic';
+  src: url('fonts/Satoshi-BoldItalic.woff2') format('woff2'),
+       url('fonts/Satoshi-BoldItalic.woff') format('woff'),
+       url('fonts/Satoshi-BoldItalic.ttf') format('truetype');
+       font-weight: 700;
+       font-display: swap;
+       font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-Black';
+  src: url('fonts/Satoshi-Black.woff2') format('woff2'),
+       url('fonts/Satoshi-Black.woff') format('woff'),
+       url('fonts/Satoshi-Black.ttf') format('truetype');
+       font-weight: 900;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Satoshi-BlackItalic';
+  src: url('fonts/Satoshi-BlackItalic.woff2') format('woff2'),
+       url('fonts/Satoshi-BlackItalic.woff') format('woff'),
+       url('fonts/Satoshi-BlackItalic.ttf') format('truetype');
+       font-weight: 900;
+       font-display: swap;
+       font-style: italic;
+}
+`;
+
+export const ImageContainer = styled.div``;
+
 export const AppContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -24,6 +168,26 @@ export const BoxContainer = styled.div`
   margin: 2rem 0rem;
   background-blend-mode: soft-light;
   backdrop-filter: blur(20px);
+  @media (max-width: 600px) {
+    justify-content: center;
+    margin: 1rem;
+    width: 85vw;
+  }
+`;
+
+export const LoginContainer = styled.form`
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-end;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  @media (max-width: 600px) {
+    justify-content: center;
+  }
 `;
 
 export const FormContainer = styled.form`
@@ -36,6 +200,7 @@ export const FormContainer = styled.form`
   align-self: stretch;
   flex-shrink: 0;
   position: relative;
+  width: 50%;
 `;
 
 export const HeaderContainer = styled.div`
@@ -53,14 +218,14 @@ export const HeaderContainer = styled.div`
 export const MutedLink = styled.a`
   font-size: 11px;
   color: #4dc4d2;
-  font-weight: 500;
+  font: 300 14px "Satoshi-Light", sans-serif;
   text-decoration: none;
 `;
 
 export const BoldLink = styled.a`
   font-size: 11px;
   color: #ffc442;
-  font-weight: 500;
+  font: 300 14px "Satoshi-Light", sans-serif;
   text-decoration: none;
   margin: 0 4px;
 `;
@@ -77,12 +242,18 @@ export const Input = styled.input`
   padding: 20px 24px 20px 24px;
   border: none;
   text-align: left;
-  font: 700 20px "JetBrains Mono", sans-serif;
+  font: 300 18px "Satoshi-Light", sans-serif;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   outline: none;
+  @media (max-width: 600px) {
+    justify-content: center;
+    font: 300 14px "Satoshi-Light", sans-serif;
+    padding: 12px 12px 12px 12px;
+    // border-radius: 12px;
+  }
 `;
 
 export const InputContainer = styled.div`
@@ -98,6 +269,10 @@ export const InputContainer = styled.div`
   align-self: stretch;
   flex-shrink: 0;
   position: relative;
+  @media (max-width: 600px) {
+    justify-content: center;
+    border-radius: 12px;
+  }
 `;
 
 export const PasswordContainer = styled.div`
@@ -119,7 +294,6 @@ export const ButtonContainer = styled.div`
   border-style: solid;
   border-color: #ffffff;
   border-width: 1px;
-
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -133,15 +307,20 @@ export const ButtonContainer = styled.div`
 export const SubmitButton = styled.button`
   border: none;
   padding: 12px 24px 12px 24px;
+  font: 400 22px "Satoshi-Regular", sans-serif;
   background: none;
   color: #ffffff;
   text-align: left;
-  font: 20px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   width: 100;
+  @media (max-width: 600px) {
+    justify-content: center;
+    font: 300 14px "Satoshi-Light", sans-serif;
+    padding: 10px 24px 10px 24px;
+  }
 `;
 
 export const ExploreContainer = styled.div`
@@ -151,8 +330,14 @@ export const ExploreContainer = styled.div`
   gap: 120px;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 818px;
+  // width: 818px;
+  width: 50%;
+  margin-bottom: 4rem;
   position: relative;
+  @media (max-width: 600px) {
+    width: 100%;
+    background: #0a0a09;
+  }
 `;
 
 export const ExplorerCard = styled.div`
@@ -162,47 +347,62 @@ export const ExplorerCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0px;
-  align-items: center;
+  // align-items: center;
   justify-content: center;
   align-self: stretch;
   flex-shrink: 0;
-  height: 600px;
+  // height: 600px;
   position: relative;
   overflow: hidden;
+  width: 100%;
 `;
 
 export const ExploreCardAuthor = styled.div`
   box-sizing: border-box;
-  padding: 40px;
+  padding: 15px 40px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   align-self: stretch;
   flex-shrink: 0;
-  position: relative;
+  position: absolute;
   z-index: 99;
+  top: 10px;
 `;
 export const ProjectAuthor = styled.h4`
   color: #ffffff;
   text-align: left;
-  font: 400 24px "JetBrains Mono", sans-serif;
+  font: 300 20px 'Satoshi-Bold', sans-serif;
   position: relative;
   width: 130px;
+  margin-bottom: 1rem;
+  text-decoration: none:
 `;
 export const PostTime = styled.h4`
   color: #989898;
   text-align: left;
-  font: 400 24px "JetBrains Mono", sans-serif;
+  font: 300 18px "Satoshi-VariableItalic", sans-serif;
   position: relative;
 `;
 
-export const CardTitle = styled.div``;
+export const CardTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 1rem;
+`;
 export const ProjectTitle = styled.h3`
   color: #ffffff;
   text-align: left;
-  font: 400 24px "JetBrains Mono", sans-serif;
+  font: 300 24px "Satoshi-Bold", sans-serif;
   position: relative;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-left: 40px;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 export const CardImage = styled.img`
@@ -212,7 +412,6 @@ export const CardImage = styled.img`
     rgba(20, 20, 20, 0) 0%,
     rgba(20, 20, 20, 1) 100%
   );
-  padding: 40px;
   display: flex;
   flex-direction: row;
   gap: 0px;
@@ -221,32 +420,47 @@ export const CardImage = styled.img`
   align-self: stretch;
   flex: 1;
   position: relative;
+  width: 100%;
 `;
 
 export const SideNav = styled.div`
-padding: 40px 0px 40px 0px;
-display: flex;
-flex-direction: row;
-gap: 80px;
-align-items: flex-start;
-justify-content: center;
-// position: sticky;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  font: 300 20px "Satoshi-Regular", sans-serif;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+    // width: 100vw;
+  }
+  `;
+  
+  export const NavLinks = styled.div`
+  display: flex;
+  margin: 1rem;
+  flex-direction: column;
+  position: absolute;
+  align-items: flex-start;
+  @media (max-width: 600px) {
+    background: rgb(11,11,12);
+    // position: relative;
+    width: 100vw;
+    flex-direction: row;
+    z-index: 100;
+    justify-content: center;
+    bottom: 0;
+    margin-bottom: 0;
+  }
 `;
 
-export const NavLinks = styled.div`
-display: flex;
-margin: 1rem;
-flex-direction: column;
-position: absolute;
-align-items: flex-start;
-`
-
 export const NavIcon = styled.img`
-box-sizing: border-box;
-flex-shrink: 0;
-position: relative;
-overflow: visible;
-`
+  box-sizing: border-box;
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+`;
+
 
 export const LinkStyle = {
   margin: "1rem",
@@ -258,14 +472,26 @@ export const LinkStyle = {
   justifyContent: "center",
   flexShrink: 0,
   position: "relative",
-}
+};
 
-export const Container = styled.div`
-margin: 2rem 8rem;
-display: flex;
-flex-direction: row;
-justify-content: space-evenly;
+export const NavLinkA = styled.div`
+@media (max-width: 600px) {
+  display: none;
+}
 `
+export const Container = styled.div`
+  margin: 2rem 8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  // width: 50%;
+  @media (max-width: 600px) {
+    margin: 2rem;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 99;
+  }
+`;
 
 export const TopContainer = styled.div`
   // width: 100%;
@@ -294,41 +520,29 @@ export const BackDrop = styled(motion.div)`
   //     );
 `;
 
-// export const HeaderContainer = styled.div`
-//   // width: 100%;
-//   // display: flex;
-//   // flex-direction: column;
-//   // align-items: center;
-// `;
 export const HeaderText = styled.h2`
-  // font-size: 45px;
-  // font-weight: 600;
-  // line-height: 1;
-  // color: #175d8f;
-  // z-index: 10;
-  // margin: 0;
-  // text-align: center;
   color: #ffffff;
-  text-align: left;
-  font-size: 48px;
+  text-align: center;
   position: relative;
   display: flex;
   align-items: center;
+  font: 300 40px "Satoshi-Regular", sans-serif;
   justify-content: flex-start;
+  @media (max-width: 600px) {
+    font-size: 29px;
+  }
 `;
 export const SmallText = styled.h5`
-  // color: #175d8f;
-  // font-weight: 500;
-  // font-size: 16px;
-  // z-index: 10;
-  // margin: 0;
   color: #ffffff;
-  text-align: left;
-  font-size: 16px;
+  text-align: center;
   position: relative;
   display: flex;
   align-items: center;
+  font: 300 16px "Satoshi-Regular", sans-serif;
   justify-content: flex-start;
+  @media (max-width: 600px) {
+    font-size: 12px;
+  }
 `;
 export const InnerContainer = styled.div`
   // display: flex;
@@ -337,3 +551,9 @@ export const InnerContainer = styled.div`
   // align-items: center;
   // margin: 12px;
 `;
+
+export const ProfileContainer = styled.div`
+  width: 50%;
+`;
+
+// export const FormContainer = styled.div``

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-// import "./App.css";
+import React from "react";
 import Nav from "./components/Nav";
 import AccountBox from "./components/accountBox";
 import {
@@ -10,7 +9,6 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { io } from "socket.io-client";
 import ExploreCard from "./components/accountBox/ExploreCard";
 import About from "./components/accountBox/About";
 import ProfileCard from "./components/accountBox/ProfileCard";
@@ -41,11 +39,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-// const URL =
-//   process.env.NODE_ENV === "production" ? undefined : "http://localhost:4000";
-// export const socket = io(URL, {
-//   autoConnect: false,
-// });
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -75,13 +68,13 @@ function App() {
             path="/profile"
             element={
               <Container>
-              <SideNav />
-              <ProfileCard
-                key={ProfileCard.id}
-                projectTitle={ProfileCard.projectTitle}
-                projectDescription={ProfileCard.projectDescription}
-              />
-                </Container>
+                <SideNav />
+                <ProfileCard
+                  key={ProfileCard.id}
+                  projectTitle={ProfileCard.projectTitle}
+                  projectDescription={ProfileCard.projectDescription}
+                />
+              </Container>
             }
           />
           <Route
@@ -89,11 +82,11 @@ function App() {
             element={
               <Container>
                 <SideNav />
-              <ProjectForm
-                key={ProjectForm.id}
-                projectTitle={ProjectForm.projectTitle}
-                projectDescription={ProjectForm.projectDescription}
-              />
+                <ProjectForm
+                  key={ProjectForm.id}
+                  projectTitle={ProjectForm.projectTitle}
+                  projectDescription={ProjectForm.projectDescription}
+                />
               </Container>
             }
           />
@@ -101,16 +94,24 @@ function App() {
             path="projects/:projectId"
             element={
               <Container>
-              <SideNav />
-              <SingleProject
-                key={SingleProject.id}
-                projectTitle={SingleProject.projectTitle}
-                projectDescription={SingleProject.projectDescription}
-              />
-                   </Container>
+                <SideNav />
+                <SingleProject
+                  key={SingleProject.id}
+                  projectTitle={SingleProject.projectTitle}
+                  projectDescription={SingleProject.projectDescription}
+                />
+              </Container>
             }
           />
-          <Route path="/comments" element={<Comments />} />
+          <Route
+            path="/comments"
+            element={
+              <Container>
+                <SideNav />
+                <Comments />
+              </Container>
+            }
+          />
         </Routes>
       </Router>
     </ApolloProvider>

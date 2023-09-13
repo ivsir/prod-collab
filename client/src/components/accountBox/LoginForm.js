@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useContext } from "react";
 import { AccountContext } from "../../components/accountBox/AccountContext";
 import {
+  ImageContainer,
   BoldLink,
   BoxContainer,
-  FormContainer,
+  LoginContainer,
   InputContainer,
   Input,
   MutedLink,
@@ -56,8 +57,9 @@ export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
 
   return (
+    // <ImageContainer>
     <BoxContainer>
-      <FormContainer id="login-container" onSubmit={handleFormSubmit}>
+      <LoginContainer id="login-container" onSubmit={handleFormSubmit}>
         <InputContainer>
           <Input
             id="login-input1"
@@ -80,15 +82,16 @@ export function LoginForm(props) {
         </InputContainer>
         <ButtonContainer>
           <SubmitButton id="login-button" type="submit">
-Login          </SubmitButton>
+            Login{" "}
+          </SubmitButton>
         </ButtonContainer>
-      <MutedLink id=" muted-link" href="#">
-        <BoldLink id="bold" href="#" onClick={switchToSignup}>
-          Create an Account
-        </BoldLink>
-      </MutedLink>
-      </FormContainer>
-
+        <MutedLink id=" muted-link" href="#">
+          <BoldLink id="bold" href="#" onClick={switchToSignup}>
+            Create an Account
+          </BoldLink>
+        </MutedLink>
+      </LoginContainer>
     </BoxContainer>
+    // </ImageContainer>
   );
 }

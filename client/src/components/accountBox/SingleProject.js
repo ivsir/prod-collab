@@ -1,5 +1,5 @@
 import React from "react";
-// Import the `useParams()` hook
+
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import AuthService from "../../utils/auth";
@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { QUERY_SINGLE_PROJECT } from "../../utils/queries";
 import { ADD_MEMBER } from "../../utils/mutations";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 const SinglePostContainer = styled.div`
   .single-post-container {

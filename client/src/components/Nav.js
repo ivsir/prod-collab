@@ -15,16 +15,8 @@ const Nav = () => {
           alt="prodcollab logo"
           src={require("../assets/prodcollab.png")}
         ></img>
-        {/* <h1>(Prod)Collab</h1> */}
       </a>
-      {/* <a href="/explore" class="brand-title2">
-        <img
-          className="logo2"
-          alt="codecollab logo"
-          src={require("../assets/cc.png")}
-        ></img>
-      </a> */}
-      <nav className="navbar">
+      {/* <nav className="navbar">
         <input type="checkbox" id="nav-check" />
         <div class="nav-btn">
           <label for="nav-check">
@@ -50,7 +42,7 @@ const Nav = () => {
             <a href="/">Login</a>
           )}
         </div>
-      </nav>
+      </nav> */}
     </header>
   );
 };
