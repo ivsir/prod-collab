@@ -1,14 +1,58 @@
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Image,
+  Input,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 
 import { ADD_PROJECT } from "../../utils/mutations";
+import imgMutation from "../../utils/imgMutation";
+import imgQuery from "../../utils/imgQuery";
+
 import { FormContainer } from "./Common";
 import Auth from "../../utils/auth";
 
+const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
+const URL = "/images";
+
+const ErrorText = ({ children, ...props }) => (
+  <Text fontSize="lg" color="red.300" {...props}>
+    {children}
+  </Text>
+);
+
 const ProjectForm = () => {
-  const [projectTitle, setProjectTitle] = useState("");
-  const [projectDescription, setProjectDescription] = useState("");
+  // Handles Image
+  const [refetch, setRefetch] = useState(0);
+  const [imgError, setImgError] = useState("");
+  const {
+    mutate: uploadImage,
+    isLoading: uploading,
+    error: uploadError,
+  } = imgMutation({ url: URL });
+
+  const handleUpload = async (e) => {
+    const file = e.target.files[0];
+
+    if (!validFileTypes.find((type) => type === file.type)) {
+      setImgError("File must be in JPG/PNG format");
+      return;
+    }
+
+    const form = new FormData();
+    form.append("image", file);
+
+    await uploadImage(form);
+    setTimeout(() => {
+      setRefetch((s) => s + 1);
+    }, 1000);
+  };
 
   const [addProject, { error }] = useMutation(ADD_PROJECT, {
     update(cache, { data: { addProject } }) {
@@ -19,6 +63,9 @@ const ProjectForm = () => {
     },
   });
 
+  // Handles Project information
+  const [projectTitle, setProjectTitle] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -33,6 +80,7 @@ const ProjectForm = () => {
       setProjectTitle("");
       setProjectDescription("");
       window.location.assign("/profile");
+      console.log("success")
     } catch (err) {
       console.error(err);
     }
@@ -55,19 +103,36 @@ const ProjectForm = () => {
     <FormContainer>
       <div className="top-container">
         {/* <Slide className="slide-text"> */}
-          <h1>What do you want to create?</h1>
+        <h1>What do you want to create?</h1>
         {/* </Slide> */}
-
         {/* <Fade className="fade-text" delay={1e3} cascade damping={1e-1}> */}
-          .........Create a new project and it share with the community
+        .........Create a new project and it share with the community
         {/* </Fade> */}
-
         {Auth.loggedIn() ? (
           <>
             <form
               className="flex-row justify-center justify-space-between-md align-center box"
               onSubmit={handleFormSubmit}
             >
+              <Input
+                id="imageInput"
+                type="file"
+                hidden
+                onChange={handleUpload}
+              />
+              <Button
+                as="label"
+                htmlFor="imageInput"
+                colorScheme="blue"
+                variant="outline"
+                mb={4}
+                cursor="pointer"
+                isLoading={uploading}
+              >
+                Upload Image
+              </Button>
+              {error && <ErrorText>{error}</ErrorText>}
+              {uploadError && <ErrorText>{uploadError}</ErrorText>}
               <div className=" col-lg-9 textarea-div">
                 <textarea
                   className="first-textarea"

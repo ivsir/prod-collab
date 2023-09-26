@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
@@ -24,9 +24,25 @@ export const ADD_USER = gql`
   }
 `;
 
+// export const ADD_FOLDER = gql`
+//   mutation addFolder($userId: ID!, $folderName: String) {
+//     addFolder(userId: $userId, folderName: $folderName) {
+//       userId
+//       folderName
+//       user {
+//         _id
+//         username
+//       }
+//     }
+//   }
+// `;
+
 export const ADD_PROJECT = gql`
   mutation addProject($projectTitle: String!, $projectDescription: String!) {
-    addProject(projectTitle: $projectTitle, projectDescription: $projectDescription) {
+    addProject(
+      projectTitle: $projectTitle
+      projectDescription: $projectDescription
+    ) {
       _id
       projectTitle
       projectDescription
@@ -41,39 +57,47 @@ export const ADD_PROJECT = gql`
 `;
 
 export const ADD_MEMBER = gql`
-mutation AddMember($projectId: ID!, $memberId: ID!) {
-  addMember(projectId: $projectId, memberId: $memberId) {
-    _id
-    createdAt
-    projectAuthor
-    projectDescription
-    projectMembers {
+  mutation AddMember($projectId: ID!, $memberId: ID!) {
+    addMember(projectId: $projectId, memberId: $memberId) {
       _id
-      memberUsername
+      createdAt
+      projectAuthor
+      projectDescription
+      projectMembers {
+        _id
+        memberUsername
+      }
+      projectTitle
     }
-    projectTitle
   }
-}
 `;
 
 export const ADD_COMMENT = gql`
-  mutation addComment($projectId: ID!, $commentText: String!, $commentAuthor: String!) {
-  addComment(projectId: $projectId, commentText: $commentText, commentAuthor: $commentAuthor) {
-    _id
-    createdAt
-    projectAuthor
-    projectDescription
-    projectTitle
-    projectMembers {
+  mutation addComment(
+    $projectId: ID!
+    $commentText: String!
+    $commentAuthor: String!
+  ) {
+    addComment(
+      projectId: $projectId
+      commentText: $commentText
+      commentAuthor: $commentAuthor
+    ) {
       _id
-      memberUsername
-    }
-    comments {
-      _id
-      commentAuthor
-      commentText
       createdAt
+      projectAuthor
+      projectDescription
+      projectTitle
+      projectMembers {
+        _id
+        memberUsername
+      }
+      comments {
+        _id
+        commentAuthor
+        commentText
+        createdAt
+      }
     }
   }
-}
 `;

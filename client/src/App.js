@@ -9,6 +9,8 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ChakraProvider, Box } from "@chakra-ui/react";
+import theme from "./config/theme";
 import ExploreCard from "./components/accountBox/ExploreCard";
 import About from "./components/accountBox/About";
 import ProfileCard from "./components/accountBox/ProfileCard";
@@ -18,6 +20,7 @@ import Comments from "./components/accountBox/Comment";
 import SideNav from "./components/accountBox/SideNav";
 
 import { AppContainer, Container } from "./components/accountBox/Common";
+import Profile from "./components/accountBox/Profile";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -69,7 +72,7 @@ function App() {
             element={
               <Container>
                 <SideNav />
-                <ProfileCard
+                <Profile
                   key={ProfileCard.id}
                   projectTitle={ProfileCard.projectTitle}
                   projectDescription={ProfileCard.projectDescription}

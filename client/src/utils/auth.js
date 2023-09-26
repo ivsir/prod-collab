@@ -1,4 +1,4 @@
-import decode from 'jwt-decode';
+import decode from "jwt-decode";
 
 class AuthService {
   getProfile() {
@@ -16,39 +16,39 @@ class AuthService {
     const decoded = decode(token);
     // If the expiration time is less than the current time (in seconds), the token is expired and we return `true`
     if (decoded.exp < Date.now() / 1000) {
-      localStorage.removeItem('id_token');
+      localStorage.removeItem("id_token");
       return true;
     }
     // If token hasn't passed its expiration time, return `false`
     return false;
   }
 
-getUsername() {
-  const token = localStorage.getItem('id_token');
-  const decodedToken = decode(token);
-  const username = decodedToken.data.username;
-  return username;
-}
+  getUsername() {
+    const token = localStorage.getItem("id_token");
+    const decodedToken = decode(token);
+    const username = decodedToken.data.username;
+    return username;
+  }
 
-getId() {
-  const token = localStorage.getItem('id_token');
-  const decodedToken = decode(token);
-  const id = decodedToken.data._id;
-  return id;
-}
+  getId() {
+    const token = localStorage.getItem("id_token");
+    const decodedToken = decode(token);
+    const id = decodedToken.data._id;
+    return id;
+  }
 
   getToken() {
-    return localStorage.getItem('id_token');
+    return localStorage.getItem("id_token");
   }
 
   login(idToken) {
-    localStorage.setItem('id_token', idToken);
-    window.location.assign('/explore');
+    localStorage.setItem("id_token", idToken);
+    window.location.assign("/explore");
   }
 
   logout() {
-    localStorage.removeItem('id_token');
-    window.location.assign('/');
+    localStorage.removeItem("id_token");
+    window.location.assign("/");
   }
 }
 
