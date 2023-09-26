@@ -143,7 +143,7 @@ export default createGlobalStyle`
 }
 `;
 
-export const ImageContainer = styled.div``;
+
 
 export const AppContainer = styled.div`
   width: 100%;
@@ -190,7 +190,7 @@ export const LoginContainer = styled.form`
   }
 `;
 
-export const FormContainer = styled.form`
+export const FormContainer = styled.div`
   background-color: transparent;
   display: flex;
   flex-direction: column;
@@ -200,7 +200,7 @@ export const FormContainer = styled.form`
   align-self: stretch;
   flex-shrink: 0;
   position: relative;
-  width: 50%;
+  width: 65%;
 `;
 
 export const HeaderContainer = styled.div`
@@ -331,7 +331,7 @@ export const ExploreContainer = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   // width: 818px;
-  width: 50%;
+  width: 65%;
   margin-bottom: 4rem;
   position: relative;
   @media (max-width: 600px) {
@@ -434,16 +434,16 @@ export const SideNav = styled.div`
     align-items: center;
     // width: 100vw;
   }
-  `;
-  
-  export const NavLinks = styled.div`
+`;
+
+export const NavLinks = styled.div`
   display: flex;
   margin: 1rem;
   flex-direction: column;
   position: absolute;
   align-items: flex-start;
   @media (max-width: 600px) {
-    background: rgb(11,11,12);
+    background: rgb(11, 11, 12);
     // position: relative;
     width: 100vw;
     flex-direction: row;
@@ -461,7 +461,6 @@ export const NavIcon = styled.img`
   overflow: visible;
 `;
 
-
 export const LinkStyle = {
   margin: "1rem",
   textDecoration: "none",
@@ -475,50 +474,50 @@ export const LinkStyle = {
 };
 
 export const NavLinkA = styled.div`
-@media (max-width: 600px) {
-  display: none;
-}
-`
+  @media (max-width: 600px) {
+    display: none;
+  }
+`;
 export const Container = styled.div`
   margin: 2rem 8rem;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  // width: 50%;
   @media (max-width: 600px) {
     margin: 2rem;
     flex-direction: column;
     justify-content: space-between;
     z-index: 99;
+    align-items: center;
   }
 `;
 
-export const TopContainer = styled.div`
-  // width: 100%;
-  // height: 250px;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: flex-end;
-  // padding: 0 1.8em;
-  // padding-bottom: 5em;
-  // margin-bottom: 4rem;
-`;
-export const BackDrop = styled(motion.div)`
-  // width: 100%;
-  // height: 250px;
-  // position: absolute;
-  // display: flex;
-  // flex-direction: column;
-  // border-radius: 50%;
-  // transform: rotate(60deg);
-  // top: -0px;
-  // left: -70px;
-  // background:#FFC442;
-  // background: linear-gradient( 58deg,
-  //     rgba(241, 196, 15, 1) 0%, ) 20%,
-  //     rgba(243, 172, 18, 1) 100%
-  //     );
-`;
+// export const TopContainer = styled.div`
+//   // width: 100%;
+//   // height: 250px;
+//   // display: flex;
+//   // flex-direction: column;
+//   // justify-content: flex-end;
+//   // padding: 0 1.8em;
+//   // padding-bottom: 5em;
+//   // margin-bottom: 4rem;
+// `;
+// export const BackDrop = styled(motion.div)`
+//   // width: 100%;
+//   // height: 250px;
+//   // position: absolute;
+//   // display: flex;
+//   // flex-direction: column;
+//   // border-radius: 50%;
+//   // transform: rotate(60deg);
+//   // top: -0px;
+//   // left: -70px;
+//   // background:#FFC442;
+//   // background: linear-gradient( 58deg,
+//   //     rgba(241, 196, 15, 1) 0%, ) 20%,
+//   //     rgba(243, 172, 18, 1) 100%
+//   //     );
+// `;
 
 export const HeaderText = styled.h2`
   color: #ffffff;
@@ -552,8 +551,37 @@ export const InnerContainer = styled.div`
   // margin: 12px;
 `;
 
+// PROFILE
 export const ProfileContainer = styled.div`
-  width: 50%;
+  width: 65%;
+  display: flex;
+  flex-direction: column;
 `;
 
+
+export const ImageContainer = styled.div`
+width: 100%;
+`;
+
+export const ImageGrid = styled.div`
+display: grid;
+
+grid-template-columns: 50% 50% 50%;
+align-items: center;
+justify-content: space-between;
+`;
+
+export const ImageCard = styled.img`
+  box-sizing: border-box;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 20, 20, 0) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+  gap: 2px;
+  margin: 1rem;
+  flex: 1;
+  position: relative;
+  width: 90%;
+`;
 // export const FormContainer = styled.div``

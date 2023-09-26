@@ -1,24 +1,52 @@
-import React from "react";
-import {ProfileContainer} from "./Common.js"
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Image,
+  Input,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
+import React, { useState } from "react";
+import {
+  ProfileContainer,
+  ImageGrid,
+  ImageCard,
+  ImageContainer,
+} from "./Common.js";
+import imgQuery from "../../utils/imgQuery";
 import { QUERY_USER, QUERY_PROJECTS } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 import AuthService from "../../utils/auth";
 import { Link } from "react-router-dom";
 
 function ProfileCard(props) {
-  // const [projectList, setProjectList] = useState('');
+  const [refetch, setRefetch] = useState(0);
   const { loading, data: userData } = useQuery(QUERY_USER, {
     variables: { username: AuthService.getUsername() },
   });
+  console.log(userData,"user")
+  const projects = userData?.user.projects || [];
 
   const { data: projectData } = useQuery(QUERY_PROJECTS);
-
-  const projects = userData?.user.projects || [];
-  // setProjectList(projects);
+  console.log(projects,"projects")
+  const URL = "/images";
 
   if (loading && !userData && userData?.length <= 0 && !projectData) {
     return;
   }
+  const ErrorText = ({ children, ...props }) => (
+    <Text fontSize="lg" color="red.300" {...props}>
+      {children}
+    </Text>
+  );
+
+
+  const {
+    data: imageUrls = [],
+    isLoading: imagesLoading,
+    error: fetchError,
+  } = imgQuery(URL, refetch);
 
   const findTargetProjects = () => {
     if (!projectData) {
@@ -27,12 +55,12 @@ function ProfileCard(props) {
 
     const allProjects = projectData.projects;
 
-    const userId = AuthService.getId();
+    const profileId = AuthService.getId();
 
     const final = allProjects
       .filter((project) => {
         const members = project.projectMembers;
-        return members.some((member) => member.memberId === userId);
+        return members.some((member) => member.memberId === profileId);
       })
       .map((project, index) => (
         <div key={index} className="explore__card">
@@ -84,16 +112,43 @@ function ProfileCard(props) {
   return (
     <ProfileContainer>
       {/* <div className="profile-button"><a href="projectform">Create a Project</a></div> */}
+      <Text textAlign="left" mb={4}>
+        Posts
+      </Text>
+      {imagesLoading && (
+        <CircularProgress
+          color="gray.600"
+          trackColor="blue.300"
+          size={7}
+          thickness={10}
+          isIndeterminate
+        />
+      )}
+      {fetchError && (
+        <ErrorText textAlign="left">Failed to load images</ErrorText>
+      )}
+      {!fetchError && imageUrls?.length === 0 && (
+        <Text textAlign="left" fontSize="lg" color="gray.500">
+          No images found
+        </Text>
+      )}
+      <ImageContainer>
+        <ImageGrid>
+          {imageUrls?.length > 0 &&
+            imageUrls.map((url) => (
+              <ImageCard src={url} alt="Image" key={url} />
+            ))}
+        </ImageGrid>
+      </ImageContainer>
+      {renderProjects()}
+      {findTargetProjects()}
       <Link to="/projectform">
-        <h1 className="page__title">My Projects</h1>
         <div className="btn-container">
           <button className="profile-button content">
             Create a new project
           </button>
         </div>
       </Link>
-      {renderProjects()}
-      {findTargetProjects()}
     </ProfileContainer>
   );
 }

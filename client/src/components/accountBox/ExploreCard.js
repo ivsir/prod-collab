@@ -8,8 +8,6 @@ function ExploreCard(props) {
   const { loading, data } = useQuery(QUERY_PROJECTS);
   const projects = data?.projects || [];
 
-  console.log(data);
-
   return (
     <ExploreContainer>
       {projects.map((projects) => (
