@@ -2,7 +2,7 @@ import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import axiosClient from "../config/axios";
 
-const useMutation = ({ url, method = "POST" }) => {
+const useMutation = ({ url, method = "POST" }, userId) => {
   const toast = useToast();
   const [state, setState] = useState({
     isLoading: false,
@@ -14,6 +14,10 @@ const useMutation = ({ url, method = "POST" }) => {
       ...prev,
       isLoading: true,
     }));
+
+    // data.userId = userId;
+    axiosClient.defaults.headers.common["x-user-id"] = userId;
+
     axiosClient({ url, method, data })
       .then(() => {
         setState({ isLoading: false, error: "" });
@@ -33,4 +37,3 @@ const useMutation = ({ url, method = "POST" }) => {
 };
 
 export default useMutation;
-

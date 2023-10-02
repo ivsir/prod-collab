@@ -17,6 +17,8 @@ import {
 import imgQuery from "../../utils/imgQuery";
 import { QUERY_USER, QUERY_PROJECTS } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
+import Auth from "../../utils/auth";
+
 import AuthService from "../../utils/auth";
 import { Link } from "react-router-dom";
 
@@ -42,11 +44,13 @@ function ProfileCard(props) {
   );
 
 
+  const userId= Auth.getProfile().data.username; 
+
   const {
     data: imageUrls = [],
     isLoading: imagesLoading,
     error: fetchError,
-  } = imgQuery(URL, refetch);
+  } = imgQuery(URL, refetch, userId);
 
   const findTargetProjects = () => {
     if (!projectData) {

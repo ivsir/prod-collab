@@ -7,19 +7,21 @@ import {
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
+import { UploadButton } from "./Common";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
-
 import { ADD_PROJECT } from "../../utils/mutations";
 import imgMutation from "../../utils/imgMutation";
+// import fldrMutation from "../../utils/fldrMutation";
 import imgQuery from "../../utils/imgQuery";
 
 import { FormContainer } from "./Common";
 import Auth from "../../utils/auth";
+import { QUERY_USER } from "../../utils/queries";
 
 const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
-const URL = "/images";
 
 const ErrorText = ({ children, ...props }) => (
   <Text fontSize="lg" color="red.300" {...props}>
@@ -31,15 +33,20 @@ const ProjectForm = () => {
   // Handles Image
   const [refetch, setRefetch] = useState(0);
   const [imgError, setImgError] = useState("");
+  const [uploading, setUploading] = useState(false);
+
+  const URL = "/images";
+  // const URLTwo= '/upload-image'
+
+  const userId = Auth.getProfile().data.username; // Adjust this line based on your Auth implementation
+  console.log(userId);
   const {
     mutate: uploadImage,
-    isLoading: uploading,
+    // isLoading: uploading,
     error: uploadError,
-  } = imgMutation({ url: URL });
+  } = imgMutation({ url: URL }, userId);
 
-  const handleUpload = async (e) => {
-    const file = e.target.files[0];
-
+  const handleUpload = async (file) => {
     if (!validFileTypes.find((type) => type === file.type)) {
       setImgError("File must be in JPG/PNG format");
       return;
@@ -49,6 +56,7 @@ const ProjectForm = () => {
     form.append("image", file);
 
     await uploadImage(form);
+
     setTimeout(() => {
       setRefetch((s) => s + 1);
     }, 1000);
@@ -66,10 +74,32 @@ const ProjectForm = () => {
   // Handles Project information
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
+      const file = document.getElementById("imageInput").files[0];
+
+      if (!file) {
+        // Handle the case where no image is selected (optional)
+        console.error("No image selected");
+        return;
+      }
+
+      // Check if title and description are not empty
+      if (!projectTitle || !projectDescription) {
+        console.error("Title and description cannot be empty");
+        return;
+      }
+
+      if (file) {
+        // If a file is selected, upload it
+        setUploading(true);
+        await handleUpload(file);
+        setUploading(false);
+      }
+
       const { data } = await addProject({
         variables: {
           projectTitle,
@@ -80,7 +110,7 @@ const ProjectForm = () => {
       setProjectTitle("");
       setProjectDescription("");
       window.location.assign("/profile");
-      console.log("success")
+      console.log("success");
     } catch (err) {
       console.error(err);
     }
@@ -104,10 +134,6 @@ const ProjectForm = () => {
       <div className="top-container">
         {/* <Slide className="slide-text"> */}
         <h1>What do you want to create?</h1>
-        {/* </Slide> */}
-        {/* <Fade className="fade-text" delay={1e3} cascade damping={1e-1}> */}
-        .........Create a new project and it share with the community
-        {/* </Fade> */}
         {Auth.loggedIn() ? (
           <>
             <form
@@ -118,12 +144,15 @@ const ProjectForm = () => {
                 id="imageInput"
                 type="file"
                 hidden
-                onChange={handleUpload}
+                // onChange={handleUpload}
               />
+              <UploadButton>
               <Button
+                className="submitButton"
                 as="label"
                 htmlFor="imageInput"
                 colorScheme="blue"
+                color="white"
                 variant="outline"
                 mb={4}
                 cursor="pointer"
@@ -131,6 +160,7 @@ const ProjectForm = () => {
               >
                 Upload Image
               </Button>
+              </UploadButton>
               {error && <ErrorText>{error}</ErrorText>}
               {uploadError && <ErrorText>{uploadError}</ErrorText>}
               <div className=" col-lg-9 textarea-div">
