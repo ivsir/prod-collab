@@ -1,8 +1,5 @@
-// const { Schema, model } = require("mongoose");
-// const dateFormat = require("../utils/dateFormat");
 import { Schema, model } from "mongoose";
-// import dateFormat from "../utils/dateFormat.mjs";
-import { formatTimestamp } from "../utils/dateFormat.mjs";
+import { formatTimestamp} from "../utils/dateFormat.mjs";
 
 const projectSchema = new Schema({
   projectTitle: {
@@ -64,7 +61,7 @@ const projectSchema = new Schema({
       createdAt: {
         type: Date,
         default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
+        get: (timestamp) => formatTimestamp(timestamp),
       },
     },
   ],

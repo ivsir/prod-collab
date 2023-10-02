@@ -79,6 +79,9 @@ export function SignupForm() {
       // creates s3 folder for user
       const response = await axios.post(`${baseURL}/create-s3-folder`, {
         userId,
+        headers: {
+          "x-user-id": userId,
+        },
         // folderName: folderName,
       });
       console.log("S3 Folder Creation Response:", response);

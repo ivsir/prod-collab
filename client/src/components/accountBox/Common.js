@@ -584,4 +584,8 @@ export const ImageCard = styled.img`
   position: relative;
   width: 90%;
 `;
+
+export const UploadButton = styled.button`
+color: white;
+`
 // export const FormContainer = styled.div``
